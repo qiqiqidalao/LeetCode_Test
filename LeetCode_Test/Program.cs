@@ -787,7 +787,7 @@ namespace LeetCode_Test
         }
         #endregion
 
-        #region LeetCode_51
+        #region LeetCode_51 LeetCode_52同理只要返回解决方案个数
         public IList<IList<string>> SolveNQueens(int n)
         {
             IList<IList<string>> res = new List<IList<string>>();
