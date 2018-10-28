@@ -787,7 +787,75 @@ namespace LeetCode_Test
         }
         #endregion
 
+        #region LeetCode_51
+        public IList<IList<string>> SolveNQueens(int n)
+        {
+            IList<IList<string>> res = new List<IList<string>>();
+            //N皇后棋盘 下标表示行，值代表列，不用0行0列
+            int[] checkerboard = new int[n + 1];
+            NQueens(res, checkerboard, 1);//回溯 从第一行开始
+            return res;
+        }
 
+        public void NQueens(IList<IList<string>> res, int[] cb, int current)
+        {
+            //如果现在的行号等于输入的n 说明排列完成
+            if (current == cb.Length)
+            {
+                List<string> r = new List<string>();
+                for (int i = 1; i < cb.Length; i++)
+                {
+                    StringBuilder temp = new StringBuilder("");
+                    //cb.Length比n大1 故构造一行的循环次数为cb.Length - 1
+                    //当然也可以用for (int j = 1; j< cb.Length; j++) 下标不同而已
+                    for (int j = 0; j < cb.Length - 1; j++)
+                    {
+                        if (cb[i] - 1 == j) temp.Append('Q');
+                        else temp.Append('.');
+                    }
+                    r.Add(temp.ToString());
+                }
+                res.Add(r);
+            }
+            else
+            {
+                //这个循环并不是针对行 而是针对列
+                //即设置当前皇后的列cb[current] = i;
+                for (int i = 1; i < cb.Length; i++)
+                {
+                    cb[current] = i;
+                    //判断是否有同列同对角线，不用考虑同行
+                    if (check_NQueens(cb, current))
+                    {
+                        //如果当前位置不冲突，进行下一个皇后的放置
+                        NQueens(res, cb, current + 1);
+                    }
+                    //否则换一个位置 再判断
+                }
+            }
+            return;
+        }
+
+        public bool check_NQueens(int[] cb, int current)
+        {
+            //从第二个皇后开始和之前的皇后位置进行判断，直到当前皇后放的位置
+            for (int i = 2; i <= current && i < cb.Length; i++)
+            {
+                for (int j = 1; j < i; j++)
+                {
+                    //{i,cb[i]} {j,cb[j]}表示两个皇后
+                    //cb[i]==cb[j]表示同列
+                    //Math.Abs(cb[i] - cb[j]) == i - j表示同对角线(两条)
+                    //回溯条件保证了i与j不可能相等，所以不考虑行相等
+                    if (cb[i] == cb[j] || (Math.Abs(cb[i] - cb[j]) == i - j))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        #endregion
     }
 
 
