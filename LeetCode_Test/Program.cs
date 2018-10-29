@@ -16,6 +16,13 @@ namespace LeetCode_Test
             public TreeNode(int x) { val = x; }
         }
 
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int x) { val = x; }
+        }
+
         static void Main(string[] args)
         {
             //string str = "bacbababadababacambabacaddababacasdsd";
@@ -854,6 +861,30 @@ namespace LeetCode_Test
                 }
             }
             return true;
+        }
+        #endregion
+
+        #region LeetCode_203
+        public ListNode RemoveElements(ListNode head, int val)
+        {
+            if (head == null) return null;
+            while (head != null && head.val == val) head = head.next;
+            if (head == null) return null;
+            ListNode note = head,temp1 = head, temp2 = head.next;
+            while (temp2 != null)
+            {
+                if (temp2.val == val)
+                {
+                    temp1.next = temp2.next;
+                    temp2 = temp2.next;
+                }
+                else
+                {
+                    temp1 = temp1.next;
+                    temp2 = temp2.next;
+                }
+            }
+            return note;
         }
         #endregion
     }
