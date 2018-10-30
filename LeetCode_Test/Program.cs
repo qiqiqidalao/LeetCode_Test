@@ -899,7 +899,7 @@ namespace LeetCode_Test
             Stack<TreeNode> temp = new Stack<TreeNode>();
             while (root != null || temp.Count != 0)
             {
-                while (root != null)
+                while (root != null)//while改成if同样可以
                 {
                     res.Add(root.val);
                     temp.Push(root);
@@ -922,6 +922,36 @@ namespace LeetCode_Test
                 solve_PreorderTraversal(root.left, res);
                 solve_PreorderTraversal(root.right, res);
             }
+        }
+        #endregion
+
+        #region LeetCode_728
+        public IList<int> SelfDividingNumbers(int left, int right)
+        {
+            IList<int> res = new List<int>();
+            for (int i = left; i < 10; i++)
+                res.Add(i);
+            for (int i = left < 11 ? 11 : left; i <= right; i++)
+            {
+                int temp = i;
+                bool flag = true;
+                while (temp != 0)
+                {
+                    if (temp % 10 == 0)
+                    {
+                        flag = false;
+                        break;
+                    }
+                    if (i % (temp % 10) != 0)
+                    {
+                        flag = false;
+                        break;
+                    }
+                    temp = temp / 10;
+                }
+                if (flag) res.Add(i);
+            }
+            return res;
         }
         #endregion
     }
