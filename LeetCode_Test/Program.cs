@@ -887,6 +887,43 @@ namespace LeetCode_Test
             return note;
         }
         #endregion
+
+        #region LeetCode_144
+        public IList<int> PreorderTraversal(TreeNode root)
+        {
+            IList<int> res = new List<int>();
+            //递归实现
+            //solve_PreorderTraversal(root, res);
+            //return res;
+            //非递归实现
+            Stack<TreeNode> temp = new Stack<TreeNode>();
+            while (root != null || temp.Count != 0)
+            {
+                while (root != null)
+                {
+                    res.Add(root.val);
+                    temp.Push(root);
+                    root = root.left;
+                }
+                if (temp.Count != 0)
+                {
+                    root = temp.Pop();
+                    root = root.right;
+                }
+            }
+            return res;
+        }
+
+        public void solve_PreorderTraversal(TreeNode root,IList<int> res)
+        {
+            if (root != null)
+            {
+                res.Add(root.val);
+                solve_PreorderTraversal(root.left, res);
+                solve_PreorderTraversal(root.right, res);
+            }
+        }
+        #endregion
     }
 
 
