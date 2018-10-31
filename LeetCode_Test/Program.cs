@@ -954,6 +954,45 @@ namespace LeetCode_Test
             return res;
         }
         #endregion
+
+        #region LeetCode_459
+        public bool RepeatedSubstringPattern(string s)
+        {
+            //没看懂别人写的
+            //var i = 1;
+            //var j = 0;
+            //var n = s.Length;
+            //var dp = new int[n + 1];
+            //while (i < n)
+            //{
+            //    if (s[i] == s[j]) dp[++i] = ++j;
+            //    else if (j == 0) ++i;
+            //    else j = dp[j];
+            //}
+            //return dp[n] >= 1 && (dp[n] % (n - dp[n]) == 0);
+            
+            //自己写的
+            if (s.Length <= 1) return false;
+            for (int cut = 1; cut <= s.Length / 2; cut++)
+            {
+                if (s.Length % cut == 0 && checkRepeatedStr(s, cut))
+                    return true;
+            }
+            return false;
+        }
+
+        public bool checkRepeatedStr(string s, int cut)
+        {
+            for(int i = 0; i < cut; i++)
+            {
+                for (int j = i + cut; j < s.Length; j = j + cut)
+                {
+                    if (s[i] != s[j]) return false;
+                }
+            }
+            return true;
+        }
+        #endregion
     }
 
 
