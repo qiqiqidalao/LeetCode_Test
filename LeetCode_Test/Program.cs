@@ -993,6 +993,52 @@ namespace LeetCode_Test
             return true;
         }
         #endregion
+
+        #region LeetCode_404
+        public int SumOfLeftLeaves(TreeNode root)
+        {
+            //另一种写法
+            //var sum = 0;
+            //PreOrder(root, ref sum, false);
+            //return sum;
+            int sum = 0;
+            if (root != null)
+            {
+                if (root.left != null)
+                {
+                    if (root.left.right == null && root.left.left == null)
+                        sum += root.left.val;
+                    sum += SumOfLeftLeaves(root.left);
+                }
+                if (root.right != null)
+                    sum += SumOfLeftLeaves(root.right);
+            }
+            return sum;
+        }
+        
+        public static void PreOrder(TreeNode root, ref int sum, bool left)
+        {
+            if (root == null) return;
+            if (left && root.left == null && root.right == null) sum += root.val;
+            PreOrder(root?.left, ref sum, true);
+            PreOrder(root?.right, ref sum, false);
+        }
+        #endregion
+
+        #region LeetCode_371
+        public int GetSum(int a, int b)
+        {
+            //a^b找不同的位置 即无需进位的位置
+            int res = a ^ b;
+            //a&b找同为1的位置 需要往左移一位
+            int forward = (a & b) << 1;
+            if (forward != 0)
+                return GetSum(res, forward);
+            return res;
+        }
+        #endregion
+
+
     }
 
 
