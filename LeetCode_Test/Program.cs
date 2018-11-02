@@ -1038,7 +1038,50 @@ namespace LeetCode_Test
         }
         #endregion
 
-
+        #region LeetCode_922
+        public int[] SortArrayByParityII(int[] A)
+        {
+            //使用O(n)的额外空间，但是更容易理解
+            //var odd = 1;
+            //var even = 0;
+            //var result = new int[A.Length];
+            //for (int i = 0; i < A.Length; i++)
+            //{
+            //    if (A[i] % 2 == 0)
+            //    {
+            //        result[even] = A[i];
+            //        even += 2;
+            //    }
+            //    else
+            //    {
+            //        result[odd] = A[i];
+            //        odd += 2;
+            //    }
+            //}
+            //return result;
+            //使用O(1)的额外空间
+            for (int i = 0, j = 1; i < A.Length && j < A.Length;)
+            {
+                if (A[i] % 2 != 0)
+                {
+                    int temp = A[j];
+                    A[j] = A[i];
+                    A[i] = temp;
+                }
+                else
+                    i = i + 2;
+                if (A[j] % 2 != 1)
+                {
+                    int temp = A[i];
+                    A[i] = A[j];
+                    A[j] = temp;
+                }
+                else
+                    j = j + 2;
+            }
+            return A;
+        }
+        #endregion
     }
 
 
