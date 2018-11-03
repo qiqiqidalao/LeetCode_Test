@@ -1082,6 +1082,21 @@ namespace LeetCode_Test
             return A;
         }
         #endregion
+
+        #region LeetCode_709
+        public string ToLowerCase(string str)
+        {
+            StringBuilder res = new StringBuilder("");
+            for(int i = 0; i < str.Length; i++)
+            {
+                if (str[i] >= 'A' && str[i] < 'Z')
+                    res.Append((char)(str[i] + 32));
+                else
+                    res.Append(str[i]);
+            }
+            return res.ToString();
+        }
+        #endregion
     }
 
 
