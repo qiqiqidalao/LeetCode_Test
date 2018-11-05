@@ -1097,6 +1097,75 @@ namespace LeetCode_Test
             return res.ToString();
         }
         #endregion
+
+        #region LeetCode_167
+        public int[] TwoSum(int[] numbers, int target)
+        {
+            int high = numbers.Length - 1, low = 0, index1 = 0, index2 = 0;
+            while (low < high)
+            {
+                int temp = target - numbers[low];
+                int tlow = low + 1, thigh = high;
+                while (tlow <= thigh)
+                {
+                    int mid = (tlow + thigh) / 2;
+                    if (numbers[mid] == temp)
+                    {
+                        index1 = low;
+                        index2 = mid; break;
+                    }
+                    else if (numbers[mid] < temp)
+                        tlow = mid + 1;
+                    else thigh = mid - 1;
+                }
+                low++;
+            }
+            return new int[] { index1 + 1, index2 + 1 };
+        }
+        #endregion
+
+        #region LeetCode_633
+        public bool JudgeSquareSum(int c)
+        {
+            //另一种
+            //int sqrt = (int)Math.Sqrt(c);
+            //int temp;
+            //int j = sqrt;
+            //for (int i = 0; i <= sqrt;)
+            //{
+            //    temp = i * i + j * j;
+            //    if (temp < c)
+            //    {
+            //        i++;
+            //    }
+            //    else if (temp > c)
+            //    {
+            //        j--;
+            //    }
+            //    else
+            //    {
+            //        return true;
+            //    }
+            //}
+            //return false;
+            //自己写的
+            int low = 0, high = (int)Math.Sqrt(c);
+            while (low <= high)
+            {
+                int temp = c - low * low;
+                int tlow = low, thigh = high;
+                while (tlow <= thigh)
+                {
+                    int mid = (tlow + thigh) / 2;
+                    if (mid * mid == temp) return true;
+                    else if (mid * mid > temp) thigh = mid - 1;
+                    else tlow = mid + 1;
+                }
+                low++;
+            }
+            return false;
+        }
+        #endregion
     }
 
 
