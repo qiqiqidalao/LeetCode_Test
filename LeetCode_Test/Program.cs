@@ -1166,6 +1166,23 @@ namespace LeetCode_Test
             return false;
         }
         #endregion
+
+        #region LeetCode_389
+        public char FindTheDifference(string s, string t)
+        {
+            char res = 'a';
+            int[] all = new int[27];
+            for(int i = 0; i < s.Length; i++)
+            {
+                all[s[i] - 97]++;
+                all[t[i] - 97]--;
+            }
+            all[t[t.Length - 1] - 97]--;
+            for (int i = 1; i < 27; i++)
+                if (all[i] < 0) res = (char)(i + 97);
+            return res;
+        }
+        #endregion
     }
 
 
