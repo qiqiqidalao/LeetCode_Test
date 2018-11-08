@@ -1183,6 +1183,36 @@ namespace LeetCode_Test
             return res;
         }
         #endregion
+
+        #region LeetCode_39
+        public IList<IList<int>> CombinationSum(int[] candidates, int target)
+        {
+            IList<IList<int>> res = new List<IList<int>>();
+            List<int> temp = new List<int>();
+            Solve_CombinationSum(0, candidates, target, temp, res);
+            return res;
+        }
+
+        public void Solve_CombinationSum(int start,int[] nums,int target,List<int> temp, IList<IList<int>> res)
+        {
+            if (start == nums.Length) return;
+            if (target < 0) return;
+            else if (target == 0)
+            {
+                res.Add(temp);
+                return;
+            }
+            List<int> OriginTemp = new List<int>(temp);
+            for(int i = start; i < nums.Length; i++)
+            {
+                temp.Add(nums[i]);
+                Solve_CombinationSum(i, nums, target - nums[i], temp, res);
+                temp = new List<int>(OriginTemp);
+            }
+        }
+        #endregion
+
+
     }
 
 
