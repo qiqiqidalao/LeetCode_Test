@@ -1212,7 +1212,62 @@ namespace LeetCode_Test
         }
         #endregion
 
+        #region LeetCode_257
+        public IList<string> BinaryTreePaths(TreeNode root)
+        {
+            IList<string> res = new List<string>();
+            solve(root, new StringBuilder(), res);
+            return res;
+        }
 
+        public void solve(TreeNode root, StringBuilder res, IList<string> all)
+        {
+            if (root != null)
+            {
+                if (root.left == null && root.right == null)
+                {
+                    all.Add(new StringBuilder(res.ToString()).Append(root.val).ToString());
+                    return;
+                }
+                StringBuilder temp = new StringBuilder(new StringBuilder(res.ToString()).Append(root.val).Append('-').Append('>').ToString());
+                solve(root.left, temp, all);
+                solve(root.right, temp, all);
+            }
+        }
+        //另一种写法 思路相同
+        //public IList<string> BinaryTreePaths(TreeNode root)
+        //{
+        //    if (root == null)
+        //        return new List<string>();
+
+        //    IList<string> result = new List<string>();
+        //    if (root.left == null && root.right == null)
+        //    {
+        //        result.Add(root.val.ToString());
+        //        return result;
+        //    }
+
+        //    GetPath(root, result, String.Empty);
+        //    return result;
+        //}
+
+        //private void GetPath(TreeNode node, IList<string> result, string str)
+        //{
+        //    if (node == null)
+        //        return;
+
+        //    if (node.left == null && node.right == null)
+        //    {
+        //        str += node.val.ToString();
+        //        result.Add(str);
+        //    }
+
+        //    if (node.left != null)
+        //        GetPath(node.left, result, str + node.val.ToString() + "->");
+        //    if (node.right != null)
+        //        GetPath(node.right, result, str + node.val.ToString() + "->");
+        //}
+        #endregion
     }
 
 
