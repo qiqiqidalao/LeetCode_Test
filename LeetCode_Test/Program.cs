@@ -1268,6 +1268,25 @@ namespace LeetCode_Test
         //        GetPath(node.right, result, str + node.val.ToString() + "->");
         //}
         #endregion
+
+        #region LeetCode_551
+        public bool CheckRecord(string s)
+        {
+            int Absent = 0;
+            for(int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == 'A') Absent++;
+                if (s[i] == 'L')
+                {
+                    if (i + 1 < s.Length && s[i + 1] == 'L')
+                        if (i + 2 < s.Length && s[i + 2] == 'L')
+                            return false;
+                }
+                if (Absent > 1) return false;
+            }
+            return true;
+        }
+        #endregion
     }
 
 
