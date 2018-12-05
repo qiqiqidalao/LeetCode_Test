@@ -8,6 +8,7 @@ namespace LeetCode_Test
 {
     class Program
     {
+
         public class TreeNode
         {
             public int val;
@@ -30,7 +31,8 @@ namespace LeetCode_Test
             //List<int> res = KMP(str, ctr);
             //foreach (int temp in res)
             //    Console.WriteLine("下标：" + temp + "存在匹配字符串");
-            Console.WriteLine(InfixExpToPostfixExp("(a*(b+c/d-e)+f)"));
+            //Console.WriteLine(InfixExpToPostfixExp("(a*(b+c/d-e)+f)"));
+
             Console.Read();
         }
 
@@ -39,14 +41,14 @@ namespace LeetCode_Test
         {
             List<int> num = new List<int>();
             solve(root, num);
-            for(int i = 0; i < num.Count - 1; i++)
+            for (int i = 0; i < num.Count - 1; i++)
             {
                 if (num[i] >= num[i + 1])
                     return false;
             }
             return true;
         }
-        public void solve(TreeNode root,List<int> num)
+        public void solve(TreeNode root, List<int> num)
         {
             if (root != null)
             {
@@ -211,7 +213,7 @@ namespace LeetCode_Test
             public int[] Shuffle()
             {
                 nums = (int[])re.Clone();
-                for(int i = 0; i < nums.Length; i++)
+                for (int i = 0; i < nums.Length; i++)
                 {
                     int temp = i + random.Next() % (nums.Length - i);
                     int t = nums[temp];
@@ -232,7 +234,7 @@ namespace LeetCode_Test
             for (int i = 0; i < strs.Length; i++)
                 sort_strs.Add(String.Join("", strs[i].ToCharArray().OrderBy(o => o)));
             Dictionary<string, IList<string>> res = new Dictionary<string, IList<string>>();
-            for(int i = 0; i < sort_strs.Count; i++)
+            for (int i = 0; i < sort_strs.Count; i++)
             {
                 if (res.ContainsKey(sort_strs[i]))
                     res[sort_strs[i]].Add(strs[i]);
@@ -280,7 +282,7 @@ namespace LeetCode_Test
         public string LongestPalindrome(string s)
         {
             int max = 0, left = 0;
-            for(int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 //检查以i为中心点的回文长度
                 int temp1 = Solve_LongestPalindrome(s, i, i);
@@ -296,7 +298,7 @@ namespace LeetCode_Test
             }
             return s.Substring(left, max);
         }
-        public int Solve_LongestPalindrome(string s,int left,int right)
+        public int Solve_LongestPalindrome(string s, int left, int right)
         {
             while (left >= 0 && right <= s.Length - 1 && s[left] == s[right])
             {
@@ -327,7 +329,7 @@ namespace LeetCode_Test
         {
             if (nums.Length == 0) return 0;
             int max = 0, temp = 1;
-            for(int i = 1; i < nums.Length; i++)
+            for (int i = 1; i < nums.Length; i++)
             {
                 if (nums[i] > nums[i - 1])
                     temp++;
@@ -413,7 +415,7 @@ namespace LeetCode_Test
                     nums[index] = -nums[index];
             }
 
-            for(int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] > 0)
                     res.Add(i + 1);
@@ -466,9 +468,9 @@ namespace LeetCode_Test
                 dp[i, 0] = grid[i, 0] + dp[i - 1, 0];
             for (int j = 1; j < grid.GetLength(1); j++)
                 dp[0, j] = grid[0, j] + dp[0, j - 1];
-            for(int i = 1; i < grid.GetLength(0); i++)
+            for (int i = 1; i < grid.GetLength(0); i++)
             {
-                for(int j = 1; j < grid.GetLength(1); j++)
+                for (int j = 1; j < grid.GetLength(1); j++)
                 {
                     dp[i, j] = Math.Min(dp[i - 1, j], dp[i, j - 1]) + grid[i, j];
                 }
@@ -540,8 +542,8 @@ namespace LeetCode_Test
         public int IntegerBreak(int n)
         {
             int[] dp = new int[n + 1];
-            dp[0] = 0;dp[1] = 1;dp[2] = 1;dp[3] = 2;
-            for(int i = 4; i <= n; i++)
+            dp[0] = 0; dp[1] = 1; dp[2] = 1; dp[3] = 2;
+            for (int i = 4; i <= n; i++)
             {
                 //优化的写法
                 //int temp1, temp2;
@@ -549,7 +551,7 @@ namespace LeetCode_Test
                 //temp2 = Math.Max(dp[i - 3] * 3, 3 * (i - 3));
                 //dp[i] = temp1 > temp2 ? temp1 : temp2;
                 int max = 0;
-                for(int j = i - 1; j >= 1; j--)
+                for (int j = i - 1; j >= 1; j--)
                 {
                     int temp = Math.Max(dp[j] * (i - j), (i - j) * j);
                     if (temp > max) max = temp;
@@ -622,7 +624,7 @@ namespace LeetCode_Test
         {
             next[0] = -1;
             int k = -1;
-            for(int i = 1; i < str.Length; i++)
+            for (int i = 1; i < str.Length; i++)
             {
                 //如果下一个不同，那么k就变成next[k]，注意next[k]是小于k的，无论k取任何值。
                 while (k > 0 && str[k + 1] != str[i])
@@ -633,13 +635,13 @@ namespace LeetCode_Test
             }
         }
 
-        public static List<int> KMP(string str,string ctr)
+        public static List<int> KMP(string str, string ctr)
         {
             List<int> res = new List<int>();
             int[] next = new int[ctr.Length];//不是ctr.Length - 1
             Cal_NextArray(ctr, next);
             int k = -1;
-            for(int i = 0; i < str.Length; i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 //ptr和str不匹配，且k>-1（表示ptr和str有部分匹配）
                 while (k > -1 && ctr[k + 1] != str[i])
@@ -698,7 +700,7 @@ namespace LeetCode_Test
             int res = 0;
             for (int i = 0; i < nums.Length; i = i + 2)
                 res += nums[i];
-            return res;   
+            return res;
         }
         #endregion
 
@@ -752,8 +754,8 @@ namespace LeetCode_Test
             StringBuilder res = new StringBuilder("");
             Stack<char> temp = new Stack<char>();
             Dictionary<char, int> find = new Dictionary<char, int>();
-            find.Add('(', -1); find.Add('+', 0);find.Add('-', 0);find.Add('*', 1);find.Add('/', 1);
-            for(int i = 0; i < str.Length; i++)
+            find.Add('(', -1); find.Add('+', 0); find.Add('-', 0); find.Add('*', 1); find.Add('/', 1);
+            for (int i = 0; i < str.Length; i++)
             {
                 if (str[i] >= 'a' && str[i] <= 'z') res.Append(str[i]);
                 else if (str[i] == '+' || str[i] == '-' || str[i] == '/' || str[i] == '*')
@@ -870,7 +872,7 @@ namespace LeetCode_Test
             if (head == null) return null;
             while (head != null && head.val == val) head = head.next;
             if (head == null) return null;
-            ListNode note = head,temp1 = head, temp2 = head.next;
+            ListNode note = head, temp1 = head, temp2 = head.next;
             while (temp2 != null)
             {
                 if (temp2.val == val)
@@ -914,7 +916,7 @@ namespace LeetCode_Test
             return res;
         }
 
-        public void solve_PreorderTraversal(TreeNode root,IList<int> res)
+        public void solve_PreorderTraversal(TreeNode root, IList<int> res)
         {
             if (root != null)
             {
@@ -970,7 +972,7 @@ namespace LeetCode_Test
             //    else j = dp[j];
             //}
             //return dp[n] >= 1 && (dp[n] % (n - dp[n]) == 0);
-            
+
             //自己写的
             if (s.Length <= 1) return false;
             for (int cut = 1; cut <= s.Length / 2; cut++)
@@ -983,7 +985,7 @@ namespace LeetCode_Test
 
         public bool checkRepeatedStr(string s, int cut)
         {
-            for(int i = 0; i < cut; i++)
+            for (int i = 0; i < cut; i++)
             {
                 for (int j = i + cut; j < s.Length; j = j + cut)
                 {
@@ -1015,7 +1017,7 @@ namespace LeetCode_Test
             }
             return sum;
         }
-        
+
         public static void PreOrder(TreeNode root, ref int sum, bool left)
         {
             if (root == null) return;
@@ -1087,7 +1089,7 @@ namespace LeetCode_Test
         public string ToLowerCase(string str)
         {
             StringBuilder res = new StringBuilder("");
-            for(int i = 0; i < str.Length; i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 if (str[i] >= 'A' && str[i] < 'Z')
                     res.Append((char)(str[i] + 32));
@@ -1172,7 +1174,7 @@ namespace LeetCode_Test
         {
             char res = 'a';
             int[] all = new int[27];
-            for(int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 all[s[i] - 97]++;
                 all[t[i] - 97]--;
@@ -1193,7 +1195,7 @@ namespace LeetCode_Test
             return res;
         }
 
-        public void Solve_CombinationSum(int start,int[] nums,int target,List<int> temp, IList<IList<int>> res)
+        public void Solve_CombinationSum(int start, int[] nums, int target, List<int> temp, IList<IList<int>> res)
         {
             if (start == nums.Length) return;
             if (target < 0) return;
@@ -1203,7 +1205,7 @@ namespace LeetCode_Test
                 return;
             }
             List<int> OriginTemp = new List<int>(temp);
-            for(int i = start; i < nums.Length; i++)
+            for (int i = start; i < nums.Length; i++)
             {
                 temp.Add(nums[i]);
                 Solve_CombinationSum(i, nums, target - nums[i], temp, res);
@@ -1273,7 +1275,7 @@ namespace LeetCode_Test
         public bool CheckRecord(string s)
         {
             int Absent = 0;
-            for(int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 if (s[i] == 'A') Absent++;
                 if (s[i] == 'L')
@@ -1285,6 +1287,35 @@ namespace LeetCode_Test
                 if (Absent > 1) return false;
             }
             return true;
+        }
+        #endregion
+
+        #region LeetCode_491 待修正 有错
+        public IList<IList<int>> FindSubsequences(int[] nums)
+        {
+            HashSet<IList<int>> res = new HashSet<IList<int>>();
+            List<int> temp = new List<int>();
+            int start = 0;
+            solve_491(start, nums, temp, res);
+            return res.ToList();
+        }
+
+        public void solve_491(int start, int[] nums, List<int> temp, HashSet<IList<int>> res)
+        {
+            if (temp.Count > 1)
+            {
+                if (res.Contains(temp)) return;
+                res.Add(temp);
+            }
+            for (int i = start; i < nums.Length; i++)
+            {
+                if (temp.Count == 0 || nums[i] >= temp.Last())
+                {
+                    List<int> next = new List<int>(temp);
+                    next.Add(nums[i]);
+                    solve_491(i + 1, nums, next, res);
+                }
+            }
         }
         #endregion
     }
